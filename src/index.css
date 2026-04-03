@@ -1,0 +1,251 @@
+/* ── Reset & base ────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0f1117;
+  --surface:   #1a1d27;
+  --border:    #2e3147;
+  --primary:   #6c63ff;
+  --primary-h: #564fcc;
+  --success:   #22c55e;
+  --danger:    #ef4444;
+  --warn:      #f59e0b;
+  --text:      #e2e8f0;
+  --muted:     #8892a4;
+  --mono:      "JetBrains Mono", "Fira Code", monospace;
+  font-size: 15px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+header {
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle { color: var(--muted); font-size: 0.9rem; margin-top: 0.25rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+/* ── Cards ────────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.card--wide { grid-column: 1 / -1; }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.card h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ── Form controls ────────────────────────────────────────────────────────── */
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+input:focus { border-color: var(--primary); }
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+.btn {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.55rem 1.2rem;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn--primary   { background: var(--primary);   color: #fff; }
+.btn--primary:hover { background: var(--primary-h); }
+
+.btn--secondary { background: #2e3147; color: var(--text); }
+.btn--secondary:hover { background: #383d5a; }
+
+.btn--danger { background: var(--danger); color: #fff; }
+.btn--danger:hover { opacity: 0.85; }
+
+.btn--sm { padding: 0.3rem 0.75rem; font-size: 0.78rem; }
+
+/* ── Result box ───────────────────────────────────────────────────────────── */
+.result {
+  border-radius: 8px;
+  font-size: 0.9rem;
+  padding: 0.6rem 0.9rem;
+}
+
+.result--hit  { background: rgba(34,197,94,.12); border: 1px solid rgba(34,197,94,.3); }
+.result--miss { background: rgba(239,68,68,.10); border: 1px solid rgba(239,68,68,.25); color: var(--muted); }
+
+.label { color: var(--muted); margin-right: 0.4rem; }
+
+/* ── Table ────────────────────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+th {
+  text-align: left;
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(108,99,255,.06); }
+
+.center { text-align: center; }
+
+/* ── Bucket visualizer ────────────────────────────────────────────────────── */
+.hint { font-size: 0.8rem; color: var(--muted); }
+
+.bucket-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.bucket {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+
+.bucket--collision {
+  border-color: var(--warn);
+  background: rgba(245,158,11,.08);
+}
+
+.bucket-index {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.chain { display: flex; align-items: center; gap: 0.25rem; flex-wrap: wrap; }
+
+.chain-node { display: flex; align-items: center; gap: 0.25rem; }
+
+.chain-key {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: var(--mono);
+  padding: 0.1rem 0.4rem;
+  font-size: 0.8rem;
+}
+
+.chain-arrow { color: var(--warn); font-weight: 700; }
+
+/* ── Badges ───────────────────────────────────────────────────────────────── */
+.badge {
+  background: var(--primary);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.1rem 0.5rem;
+}
+
+.badge--warn { background: var(--warn); color: #000; }
+
+/* ── Toast ────────────────────────────────────────────────────────────────── */
+.toast {
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.65rem 1rem;
+  text-align: center;
+}
+
+.toast--ok  { background: rgba(34,197,94,.15); border: 1px solid rgba(34,197,94,.35); }
+.toast--err { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.35); }
+
+/* ── Misc ─────────────────────────────────────────────────────────────────── */
+.mono { font-family: var(--mono); }
+.empty { color: var(--muted); font-size: 0.875rem; }
